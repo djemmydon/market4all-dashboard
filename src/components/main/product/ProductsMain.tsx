@@ -1,26 +1,30 @@
 
 import styled from "styled-components"
+import { apiSlice } from "../../../redux/apiSlice"
+import { DataType, FetchType, ProductType } from "../../../typing"
 import Nav from "../Nav"
 
 
-
-
-
 const ProductsMain = () => {
+    const { data, isLoading, error } = apiSlice.useGetAllProductsQuery<FetchType>()
     return (
         <Body>
             <Nav />
-
             <div className="body">
                 <div className="header">
                     <h1>All Products</h1>
                 </div>
-
-                <div className="list">
-                    {data.map((item) => (
-                        <ProductChild key={item.name} item={item} />
-                    ))}
-                </div>
+                {isLoading ? (<>
+                    <p>Loading</p>
+                </>) : error ? (<>
+                    <p>Their is Error</p>
+                </>) : (
+                    <div className="list">
+                        {data?.products.map((item) => (
+                            <ProductChild key={item._id} item={item} />
+                        ))}
+                    </div>
+                )}
             </div>
         </Body>
     )
@@ -39,7 +43,7 @@ const ProductChild = ({ item }: any) => {
             </div>
 
             <div className="text">
-                <h2>{item.name}</h2>
+                <h2>{item.title}</h2>
                 <p>${item.price}</p>
             </div>
 
@@ -80,15 +84,16 @@ justify-items: space-between;
 gap: 1rem;
 border-radius: 1rem;
 border: 1px solid #f3f3f3;
-padding: 1rem 0;
+padding: 0.2rem 0;
 transition: .4s;
 cursor: pointer;
 
 .image{
     background-color: #e8e8e8;
     height: 150px;
-    padding:2rem;
-    margin: 0.5rem auto; 
+    width: 100%;
+    padding:1rem 0;
+    margin: 0 auto; 
     border-radius: 1rem;
 
 

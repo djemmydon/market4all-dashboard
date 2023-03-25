@@ -1,11 +1,12 @@
 import styled from "styled-components"
+import Head from "./dashboard/Head"
 import Nav from "./Nav"
-
 
 const Main = () => {
     return (
         <Body>
             <Nav />
+            <Head />
         </Body>
     )
 }
@@ -18,7 +19,5 @@ const Body = styled.div`
     height: 100%;
     overflow-y: scroll;
 
-    p{
-        height: 400vh;
-    }
+
 `

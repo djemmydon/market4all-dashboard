@@ -1,42 +1,55 @@
 
 import styled from "styled-components"
 import { useState } from "react"
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 
 const Side = () => {
     const [open, setOpen] = useState(true);
+    const location = useLocation()
+
+    console.log(location)
 
     const handleClick = () => {
         setOpen(!open);
     };
 
     return (
-        <Body>
-            <div className="logo">
-                <h2>MARKET4ALL</h2>
-            </div>
+        <>
+            {location.pathname === "/login" ? null : (
+            <Body>
+                <div className="logo">
+                    <h2>MARKET4ALL</h2>
+                </div>
 
-            <div className="sidebar_item">
-                <ul>
-                    <li>
-                        <NavLink to="/user">Users</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/products">Products</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/order">Order</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/reviews">Reviews</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/category">Category</NavLink>
-                    </li>
-                </ul>
-            </div>
-        </Body>
+                <div className="logo">
+                    <NavLink to="/">Dashoard</NavLink>
+                </div>
+
+                <div className="sidebar_item">
+                    <ul>
+                        <li>
+                            <NavLink to="/user">Users</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/products">Products</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/order">Order</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/reviews">Reviews</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/category">Category</NavLink>
+                        </li>
+                    </ul>
+                </div>
+            </Body>
+
+            )  }
+
+        </>
     )
 }
 
@@ -50,6 +63,18 @@ const Body = styled.div`
                 .logo{
                     padding: 1.1rem ;
                 border-bottom: 1px solid #f3f3f3;
+                a{
+                    text-decoration: none;
+                    text-align: center;
+                    color: gray;
+            
+
+
+                }
+                
+                .active{
+                        color: red;
+                    }
 
                 }
 

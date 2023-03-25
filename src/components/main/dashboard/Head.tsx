@@ -1,51 +1,52 @@
 
+
 import styled from "styled-components"
-import Nav from "./Nav"
+import { PersonAdd, AllInbox } from '@mui/icons-material';
 
 
-
-
-const UserMain = () => {
+import Nav from "../Nav"
+const Head = () => {
     return (
         <Body>
-
-            <Nav />
             <div className="body">
                 <div className="header">
                     <h1>All User</h1>
                 </div>
 
                 <div className="list">
-                    {data.map((item) => (
-                        <ProductChild key={item.name} item={item} />
-                    ))}
+
+                    <ProductChild total="1,500" name="Total User" Icon={PersonAdd} />
+                    <ProductChild total="1,500" name="Total User" Icon={PersonAdd} />
+                    <ProductChild total="3,560" name="All Order" Icon={PersonAdd} />
+                    <ProductChild total="1,500" name="Total User" Icon={PersonAdd} />
+
+
                 </div>
             </div>
         </Body>
     )
 }
 
-export default UserMain
+export default Head
 
-
-
-
-const ProductChild = ({ item }: any) => {
+const ProductChild = ({ total, name }: any) => {
     return (
         <ProductBody>
-            <h2>{item.name}</h2>
-            <p>{item.email}</p>
-            <p>{item.phone}</p>
+            <div className="text">
+                <h2>{total}</h2>
+                <p>{name}</p>
+            </div>
+
+            <div className="icon">
+                {name === "Total User" ? (<PersonAdd />) : name === "All Order" ? <AllInbox /> : ""}
+            </div>
         </ProductBody>
     )
 }
 
 
 const Body = styled.div`
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-    color: gray;
+
 
     .body{
         margin: 2rem;
@@ -57,10 +58,11 @@ const Body = styled.div`
 
     .list{
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1rem;
         justify-content: center;
         align-items: center;
+        color: grey;
     }
 
 `
@@ -70,12 +72,11 @@ const ProductBody = styled.div`
 width: 100%;
 background: #ffff;
 display: flex;
-flex-direction: column;
-justify-items: center;
+justify-content: space-between;
 align-items: center;
 border-radius: 1rem;
 border: 1px solid #f3f3f3;
-padding: 2rem 0;
+padding: 1rem 0;
 transition: .4s;
 cursor: pointer;
 
@@ -85,8 +86,25 @@ cursor: pointer;
 }
 
 
+
+.text{
+    padding: 0 0.5rem;
+}
+
+.icon{
+    margin-right:1rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 1rem;
+    background-color: #ffa4a4;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    
+}
+
 h2{
-    font-size: 1rem;
+    font-size: 2rem;
 
 }
 p{
@@ -113,16 +131,6 @@ const data = [
     },
     {
         name: "Molla Doe",
-        email: "example@gmail.com",
-        phone: "090553029i31"
-    },
-    {
-        name: "Born Noise",
-        email: "example@gmail.com",
-        phone: "090553029i31"
-    },
-    {
-        name: "John Walvi",
         email: "example@gmail.com",
         phone: "090553029i31"
     },
