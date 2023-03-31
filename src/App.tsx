@@ -11,21 +11,22 @@ import Products from './pages/product/Products';
 import Login from './pages/Login';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { UsersType, UserType } from './typing';
+import { RootState, UsersType, UserType } from './typing';
+import CreateProductPage from './pages/product/CreateProduct';
 
 
 
 function App() {
-  const user = useSelector<UserType>((state) => state.user.userInfo)
+  const users = useSelector((state): RootState => state.user.userInfo)
   const navigate = useNavigate()
 
-  console.log(user.token)
+  console.log(users)
 
   useEffect(() => {
-    if (!user?.fullName) {
+    if (!users?.token) {
       navigate("/login")
     }
-  }, [user])
+  }, [users])
 
 
 
@@ -41,6 +42,7 @@ function App() {
         <Route path='/' element={<Main />} />
         <Route path='/user' element={<User />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/create-product' element={<CreateProductPage />} />
         <Route path='/products' element={<Products />} />
       </Routes>
 

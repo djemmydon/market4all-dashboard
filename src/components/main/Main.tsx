@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import Head from "./dashboard/Head"
+import HomeMain from "./dashboard/HomeMain"
 import Nav from "./Nav"
 
 const Main = () => {
@@ -7,6 +8,7 @@ const Main = () => {
         <Body>
             <Nav />
             <Head />
+            <HomeMain />
         </Body>
     )
 }

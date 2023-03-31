@@ -2,9 +2,6 @@
 
 import styled from "styled-components"
 import { PersonAdd, AllInbox } from '@mui/icons-material';
-
-
-import Nav from "../Nav"
 const Head = () => {
     return (
         <Body>

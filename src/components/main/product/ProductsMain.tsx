@@ -1,31 +1,54 @@
 
+import { Backdrop, CircularProgress, Skeleton } from "@mui/material"
+import { useState } from "react"
 import styled from "styled-components"
 import { apiSlice } from "../../../redux/apiSlice"
 import { DataType, FetchType, ProductType } from "../../../typing"
 import Nav from "../Nav"
+import ProductView from "./ProductView"
 
 
 const ProductsMain = () => {
     const { data, isLoading, error } = apiSlice.useGetAllProductsQuery<FetchType>()
+    const [open, setOpen] = useState(false)
+    console.log(open)
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
         <Body>
+
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme: any) => theme.zIndex.drawer + 1 }}
+                open={open}
+                onClick={handleClose}
+            >
+                <ProductView />
+            </Backdrop>
             <Nav />
             <div className="body">
                 <div className="header">
                     <h1>All Products</h1>
                 </div>
-                {isLoading ? (<>
-                    <p>Loading</p>
-                </>) : error ? (<>
+                {isLoading ? (  <div className="list">
+                    <Skeleton sx={{ height: 190,  }} animation="wave" variant="rectangular" />
+                    <Skeleton sx={{ height: 190,  }} animation="wave" variant="rectangular" />
+                    <Skeleton sx={{ height: 190,  }} animation="wave" variant="rectangular" />
+                    <Skeleton sx={{ height: 190,  }} animation="wave" variant="rectangular" />
+                    <Skeleton sx={{ height: 190,  }} animation="wave" variant="rectangular" />
+                </div>) : error ? (<>
                     <p>Their is Error</p>
                 </>) : (
                     <div className="list">
                         {data?.products.map((item) => (
-                            <ProductChild key={item._id} item={item} />
+                            <ProductChild key={item._id} item={item} setOpen={setOpen} />
                         ))}
                     </div>
                 )}
             </div>
+
+            <p onClick={() => setOpen(!open)}>dnldkfc</p>
         </Body>
     )
 }
@@ -35,10 +58,10 @@ export default ProductsMain
 
 
 
-const ProductChild = ({ item }: any) => {
+const ProductChild = ({ item, setOpen }: any) => {
     return (
-        <ProductBody>
-            <div className="image">
+        <ProductBody onClick={() => setOpen(!open)}>
+            <div className="image" >
                 <img src={item.image} alt="" />
             </div>
 
@@ -70,6 +93,7 @@ const Body = styled.div`
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1rem;
+        border-radius: 1rem;
     }
 
 `
@@ -95,6 +119,7 @@ cursor: pointer;
     padding:1rem 0;
     margin: 0 auto; 
     border-radius: 1rem;
+    display: flex;
 
 
     img{

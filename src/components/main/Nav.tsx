@@ -1,10 +1,18 @@
-import { Avatar, Badge } from "@mui/material"
+
+import { useState } from "react"
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+
+import { Avatar, Badge, Popover, Typography } from "@mui/material"
 import { deepOrange } from "@mui/material/colors"
 import styled from "styled-components"
 import MessageIcon from '@mui/icons-material/Message';
+import { Line } from "react-chartjs-2";
+import { Link } from "react-router-dom";
+import { Person } from "@mui/icons-material";
 
 
 const Nav = () => {
+    const [open, setOpen] = useState(false)
     return (
         <Body>
 
@@ -15,11 +23,39 @@ const Nav = () => {
 
                 <div className="side_nav">
                     <div className="avatar">
-                        <Avatar
-                            sx={{ bgcolor: deepOrange[500], width: 24, height: 24  }}
-                            alt="Remy Sharp"
-                            src="/broken-image.jpg"
-                        >   B </Avatar>
+
+
+
+
+                        <PopupState variant="popover" popupId="demo-popup-popover">
+                            {(popupState) => (
+                                <div>
+                                    <Person
+                                        sx={{ color: "black", fontSize: 30 }}
+                                        {...bindTrigger(popupState)}
+                                    />
+                                    <Popover
+                                        {...bindPopover(popupState)}
+                                        anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'center',
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'center',
+                                        }}
+                                    >
+                                        <DropDown >
+                                            <ul>
+                                                <li>
+                                                    <Link to="/">Login</Link>
+                                                </li>
+                                            </ul>
+                                        </DropDown>
+                                    </Popover>
+                                </div>
+                            )}
+                        </PopupState>
                     </div>
 
                     <div className="notification">
@@ -78,5 +114,18 @@ const Body = styled.div`
         align-items: center;
         gap: 1rem;
     }
+
+    li{
+        width: 400px;
+    }
+}
+`
+
+const DropDown = styled.div`
+padding: 3rem;
+
+a{
+    color: #000;
+    text-decoration: none;
 }
 `

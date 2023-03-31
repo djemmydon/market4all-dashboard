@@ -35,6 +35,9 @@ const Side = () => {
                             <NavLink to="/products">Products</NavLink>
                         </li>
                         <li>
+                            <NavLink to="/create-product">Add Product</NavLink>
+                        </li>
+                        <li>
                             <NavLink to="/order">Order</NavLink>
                         </li>
                         <li>

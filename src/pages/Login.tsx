@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { DotLoader } from 'react-spinners'
 import styled from 'styled-components'
 import { apiSlice } from '../redux/apiSlice'
 import { userAction } from '../redux/user'
@@ -17,7 +18,7 @@ function Login() {
 
     })
     const dispatch = useDispatch()
-    const navigate =useNavigate()
+    const navigate = useNavigate()
 
     const handleChange = (e: any) => {
         setLogData({ ...logData, [e.target.name]: e.target.value })
@@ -74,7 +75,7 @@ function Login() {
                         </div>
 
                         <div className="button">
-                            <button type='submit'>{ loading ? "Submiting...." : "Submit"}</button>
+                            <button type='submit'>{loading ? <DotLoader color='#fff' size={30} /> : "Submit"}</button>
                         </div>
 
 
@@ -108,8 +109,8 @@ width: 100%;
             text-align: center;
             align-items: center;
             justify-content: center;
-            height: 100px;
-            background-color: red;
+            height: 80px;
+            background-color: #ff3131;
             color: white;
         }
 
@@ -154,6 +155,7 @@ width: 100%;
                 button{
                     width: 100%;
                     height: 40px;
+                    border-radius: 0.5rem;
                 }
             }
         }

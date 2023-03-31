@@ -35,3 +35,5 @@ export interface UserType {
 export interface UsersType {
   user: UserType;
 }
+
+export type RootState = ReturnType<typeof store.getState>;
